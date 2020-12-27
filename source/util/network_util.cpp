@@ -248,9 +248,13 @@ namespace tin::network
         int ret = 0;
         size_t written = 0;
 
+        padConfigureInput(1, HidNpadStyleSet_NpadStandard);
+        PadState pad;
+        padInitializeDefault(&pad);
+
         while (written < len)
         {            
-            if (hidKeysDown(CONTROLLER_P1_AUTO) & KEY_B)  // Break if user clicks 'B'
+            if (padGetButtonsDown(&pad) & HidNpadButton_B)  // Break if user clicks 'B'
                 break;
 
             errno = 0;
